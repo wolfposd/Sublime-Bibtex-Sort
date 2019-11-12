@@ -1,0 +1,18 @@
+[
+    {
+        "caption": "Bibtex-Sort: Reference-Name",
+        "command": "bibtex_sort"
+    },
+    {
+        "caption": "Bibtex-Sort: Reference-Type",
+        "command": "bibtex_sort_type"
+    },
+    {
+        "caption": "Bibtex-Sort: Author",
+        "command": "bibtex_sort_author"
+    },
+    {
+        "caption": "Bibtex-Sort: Title",
+        "command": "bibtex_sort_title"
+    }
+]

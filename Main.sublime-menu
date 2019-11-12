@@ -1,0 +1,28 @@
+[
+  {
+    "id": "edit",
+    "children": [
+      {
+        "caption": "Sort Bibtex",
+        "children": [
+          {
+            "caption": "Sort by Reference-Name",
+            "command": "bibtex_sort"
+          },
+          {
+            "caption": "Sort by Reference-Type",
+            "command": "bibtex_sort_type"
+          },
+          {
+            "caption": "Sort by Author",
+            "command": "bibtex_sort_author"
+          },
+          {
+            "caption": "Sort by Title",
+            "command": "bibtex_sort_title"
+          }
+        ]
+      }
+    ]
+  }
+]
