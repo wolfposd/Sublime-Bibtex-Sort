@@ -1,6 +1,6 @@
 # MIT License
 #
-# Copyright (c) 2019 wolfposd
+# Copyright (c) 2019-2020 wolfposd
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -23,6 +23,10 @@
 import sublime
 import sublime_plugin
 
+
+#import logging
+#logging.basicConfig(level=logging.DEBUG, format=' %(asctime)s - %(levelname)s - %(message)s')
+#logging.debug("Starte bibtex-sort")
 
 # sorts by authortag
 class BibtexSortCommand(sublime_plugin.TextCommand):
@@ -49,7 +53,7 @@ class BibtexSortAuthorCommand(sublime_plugin.TextCommand):
     def run(self, edit):
         oldContent = self.view.substr(sublime.Region(0,self.view.size()))
         newLines = getlines(oldContent)
-        newLines = sorted(newLines, key=lambda ele:findSpecificLine("author=", ele))
+        newLines = sorted(newLines, key=lambda ele:findSpecificLine("author=", ele).replace("{{", "{"))
         outputlines(self, edit, newLines)
 
 # command for sort by title
@@ -58,7 +62,7 @@ class BibtexSortTitleCommand(sublime_plugin.TextCommand):
     def run(self, edit):
         oldContent = self.view.substr(sublime.Region(0,self.view.size()))
         newLines = getlines(oldContent)
-        newLines = sorted(newLines, key=lambda ele:findSpecificLine("title=", ele))
+        newLines = sorted(newLines, key=lambda ele:findSpecificLine("title=", ele).replace("{{", "{"))
         outputlines(self, edit, newLines)
 
 #
@@ -75,7 +79,8 @@ def getlines(input):
                 curline += 1
                 newLines.append([])
 
-            newLines[curline].append(line)
+            if len(line.strip(' \r\n\t')) != 0 :
+                newLines[curline].append(line)
 
         return newLines
 
@@ -85,6 +90,7 @@ def outputlines(this, edit, output):
     for lines in output: 
         for line in lines:
            newContent += line
+        newContent += "\n"
 
     regionAll = sublime.Region(0, this.view.size())
     this.view.replace(edit, regionAll, newContent )
